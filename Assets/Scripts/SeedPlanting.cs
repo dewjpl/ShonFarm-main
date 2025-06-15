@@ -2,51 +2,52 @@ using UnityEngine;
 
 public class SeedPlanting : MonoBehaviour
 {
-    [Header("Ustawienia sadzenia")]
-    public GameObject seedPrefab; // Prefab rośliny, np. nasiona
-    public float plantDistance = 1f; // Odległość sadzenia przed graczem
+    private Player player;
+    private InventoryManager inventoryManager;
 
-    [Header("Referencje")]
-    public Transform playerTransform; // Gracz (Transform)
-    public Inventory inventory; // Ekwipunek gracza
-
-    [Header("Nazwa nasion w ekwipunku")]
-   public string seedItemName = "crops_all_0";
-// Dokładna nazwa przedmiotu w inventory
+    void Start()
+    {
+        player = GameManager.instance.player;
+        inventoryManager = player.inventoryManager;
+    }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) // PPM - sadzenie
+        if (Input.GetMouseButtonDown(1))
         {
-            TryPlantSeed();
+            RemoveOneSeed();
         }
     }
 
-    void TryPlantSeed()
+    void RemoveOneSeed()
     {
-        Debug.Log("Próba zasadzenia");
+        var toolbar = inventoryManager.toolbar;
+        var selectedSlot = toolbar.selectedSlot;
 
-        if (inventory == null)
+        if (selectedSlot == null || string.IsNullOrEmpty(selectedSlot.itemName))
         {
-            Debug.Log("Brak przypisanego ekwipunku!");
             return;
         }
 
-        if (!inventory.HasItem(seedItemName))
+        var item = GameManager.instance.itemManager.GetItemByName(selectedSlot.itemName);
+        var itemData = item?.data;
+        if (itemData == null || !itemData.isSeed)
         {
-            Debug.Log("Brak nasion w ekwipunku!");
             return;
         }
 
-        // Oblicz pozycję przed graczem (w kierunku patrzenia)
-        Vector2 plantPosition = playerTransform.position + playerTransform.up * plantDistance;
+        if (selectedSlot.count <= 0)
+        {
+            return;
+        }
 
-        // Stwórz roślinę
-        Instantiate(seedPrefab, plantPosition, Quaternion.identity);
+        selectedSlot.count--;
+        if (selectedSlot.count == 0)
+        {
+            selectedSlot.itemName = "";
+            selectedSlot.icon = null;
+        }
 
-        // Usuń jedno nasiono z ekwipunku
-        inventory.RemoveItem(seedItemName);
-
-        Debug.Log("Zasadzono nasiono!");
+        GameManager.instance.uiManager.RefreshAll();
     }
 }

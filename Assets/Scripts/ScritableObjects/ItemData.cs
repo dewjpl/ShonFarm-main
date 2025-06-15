@@ -7,4 +7,6 @@ public class ItemData : ScriptableObject
 {
     public string itemName = "itemName";
     public Sprite icon = null;
+    public GameObject seedPrefab;
+    public bool isSeed;
 }

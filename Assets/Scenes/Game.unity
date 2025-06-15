@@ -1088,7 +1088,6 @@ GameObject:
   - component: {fileID: 287571784}
   - component: {fileID: 287571783}
   - component: {fileID: 287571782}
-  - component: {fileID: 287571781}
   - component: {fileID: 287571787}
   - component: {fileID: 287571786}
   m_Layer: 0
@@ -1098,29 +1097,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &287571781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 287571780}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e83804c5967132e48a3489bb469b362d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seedPrefab: {fileID: 0}
-  plantDistance: 1
-  playerTransform: {fileID: 0}
-  inventory:
-    slots: []
-    selectedSlot:
-      itemName: 
-      count: 0
-      maxAllowed: 99
-      icon: {fileID: 0}
-  seedItemName: Seed
 --- !u!114 &287571782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2413,17 +2389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e83804c5967132e48a3489bb469b362d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedPrefab: {fileID: 0}
-  plantDistance: 1
-  playerTransform: {fileID: 0}
-  inventory:
-    slots: []
-    selectedSlot:
-      itemName: 
-      count: 0
-      maxAllowed: 99
-      icon: {fileID: 0}
-  seedItemName: Seed
 --- !u!114 &674941228 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8928967465204410509, guid: c253d7ddc91e529409cc5a512e611c9c, type: 3}
