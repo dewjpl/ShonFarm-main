@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
     public InventoryManager inventoryManager;
     private TileManager tileManager;
 
+    public int coins = 0;
+    private float moneyTimer = 0f;
+    private float moneyInterval = 60f;
+    private int moneyPerInterval = 5;
+
     private void Start()
     {
         tileManager = GameManager.instance.tileManager;
@@ -30,6 +35,13 @@ public class Player : MonoBehaviour
                     }
                 }
             }
+        }
+
+        moneyTimer += Time.deltaTime;
+        if (moneyTimer >= moneyInterval)
+        {
+            coins += moneyPerInterval;
+            moneyTimer = 0f;
         }
     }
 
